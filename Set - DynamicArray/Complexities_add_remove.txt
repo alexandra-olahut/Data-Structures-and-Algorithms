@@ -1,0 +1,56 @@
+
+ADD
+
+- the search: -> BC: theta(1)
+		 WC: theta(NrElem)     (if element exists)
+		 AC: theta(NrElem) 
+
+		     theta(NrElem) +   (if element does not exist)
+ 
+- the resize: -> BC: theta(0)        (no resize needed)
+		 WC: theta(NrElem)   (for the resize function)
+		 AC: theta(NrElem)     *(0+NrElem)/2, because there are only 2 posibilities
+
+- the add: -> BC = WC = AC = theta(1)
+
+=> per total: - if the element already exists on the first position:    theta(1)
+	      - if the element exists on the last position(or average): theta(NrElem)
+
+	      - if element does not exist, but resize is needed: theta(NrElem)+theta(NrElem)+theta(1)
+								 = theta(2* NrElem)  ~theta(NrElem)
+	      - if element does not exist and no resize needed:  theta(NrElem)+theta(0)+theta(1)
+								 = theta(NrElem)
+
+	   =>  BC: theta(1)        - element is already in the set, on first position
+		   WC: theta(2*NrElem) - element is added and resize is needed
+		   AC: theta(NrElem)
+	Overall: O( NrElem )
+
+
+
+REMOVE
+
+- the search: -> BC: theta(1) +
+		 WC: theta(NrElem) +    (if element exists)
+		 AC: theta(NrElem) +
+
+		     theta(NrElem)      (if element does not exist)
+
+- the for: -> * if element is on first position, the first for does 1 step
+						and the second (NrElem -1) steps
+	      * if element is on last position, the first for does nrElem steps
+						and the second for does 0 steps
+		* in general: first for does x steps
+			      and second for does (NrElem-1 - x_ steps)
+		=> BC=WC=AC = theta(NrElem - 1) 
+		~ theta(NrElem)
+
+=> per total: - if element does not exist:  theta(NrElem)                    ->BC
+	      - if element exists on first position: theta(1)+theta(NrElem)
+						     = theta(NrElem)
+	      - if element exists on last position: theta(NrElem)+theta(NrElem)  ->WC
+						     = theta(2*NrElem)
+
+		Overall: theta(NrElem)
+
+
